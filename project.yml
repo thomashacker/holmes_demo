@@ -1,0 +1,37 @@
+title: "Holmes-Demo"
+description: "spaCy project for the Holmes streamlit app"
+
+vars:
+  en_ontology: "data/example_search_EN_literature_ontology.owl"
+  en_literature: "data/en_literature/"
+  en_model : "en_core_web_trf"
+
+directories: ["scripts","data"]
+
+assets:
+  - dest: "data/example_search_EN_literature_ontology.owl"
+    description: "Ontology for the english literature example"
+
+workflows:
+  install:
+    - requirements
+
+commands:
+  - name: "requirements"
+    help: "Install dependencies and requirements"
+    script:
+      - "pip install -r requirements.txt"
+
+  - name: "download_en_literature"
+    help: "Download data for the english literature example"
+    script:
+      - "python -m coreferee install en"
+      - "python -m spacy download en_core_web_trf"
+      - "python scripts/download.py ${vars.en_ontology} ${vars.en_model} ${vars.en_literature}"
+    deps:
+      - ${vars.en_ontology}
+
+  - name: "app"
+    help: "Start the Holmes demo"
+    script:
+      - "python -m streamlit run scripts/app.py"

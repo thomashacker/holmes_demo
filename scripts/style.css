@@ -1,0 +1,100 @@
+.central_text{
+    text-align: center;
+    top: 50%;
+}
+
+.kpi{
+    text-align: center;
+    border-radius: 10px;
+    background: linear-gradient(90deg, rgba(77,241,241,1) 0%, rgba(82,124,230,1) 43%, rgba(219,0,132,1) 100%);
+    margin-top: 15%;
+    margin-bottom: 5%;
+    padding-top: 15%;
+    padding-bottom: 5%;
+}
+
+.kpi:hover {
+    transform: scale(1.1);
+  }
+
+.card_text{
+    text-align: center;
+    color: white;
+}
+
+.label {
+    padding: 1%;
+    font-weight: bold;
+}
+
+.rank {
+    border-style: solid;
+    border-width:  2px;
+    border-radius: 5px;
+    border-color: #0c0c0e;
+    padding: 1%;
+    font-weight: bold;
+}
+
+.text{
+    display: inline;
+}
+
+.text_mark {
+    background-color: green;
+    color: white;
+    padding: 0.5%;
+    border-radius: 5px;
+    text-align: center;
+    display: inline-flex;
+    font-weight: bold;
+}
+
+.text_mark:hover {
+    transform: scale(1.1);
+}
+
+.text_mark:before{
+    content: attr(data-text);
+    position:absolute;
+    width: 200%;
+  
+    /* position tooltip correctly */
+    left:100%;
+    margin-left:5px;
+    
+    /* vertically center */
+    top:50%;
+    transform:translateY(-50%);
+        
+    padding:5px;
+    border-radius:5px;
+    background:rgb(35, 34, 36);
+    text-align:center;
+    font-weight: normal;
+    font-size: 70%;
+    display:none;
+}
+
+.text_mark:hover:before {
+    display:block;
+}
+
+.answer_container{
+    font-weight: bold;
+}
+
+.answer {
+    background-color: rgb(38, 38, 44);
+    color: white;
+    padding: 0.5%;
+    border-radius: 5px;
+    text-align: center;
+    display: inline-flex;
+    margin: 1.5%;
+    font-weight: bold;
+}
+
+.answer:hover {
+    transform: scale(1.05);
+}
