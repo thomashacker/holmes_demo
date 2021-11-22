@@ -1,5 +1,5 @@
-title: "Holmes-Demo"
-description: "spaCy project for the Holmes streamlit app"
+title: "Holmes Demo"
+description: "This repository builds a streamlit application for demonstrating Topic Extraction with [Holmes](https://github.com/msg-systems/holmes-extractor)."
 
 vars:
   en_ontology: "data/example_search_EN_literature_ontology.owl"
