@@ -1,6 +1,6 @@
 # Welcome to Holmes
 
-![](data/img/lunar.PNG)
+![](https://github.com/thomashacker/holmes_demo/blob/main/data/img/lunar.png)
 
 This repository builds a streamlit application for demonstrating Topic Extraction with [Holmes](https://github.com/msg-systems/holmes-extractor). 
 
