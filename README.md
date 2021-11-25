@@ -1,7 +1,5 @@
 # Welcome to Holmes
 
-![](data/img/lunar.PNG)
-
 This repository builds a streamlit application for demonstrating Topic Extraction with [Holmes](https://github.com/msg-systems/holmes-extractor). 
 
 > The project is wrapped in a spacy project.
