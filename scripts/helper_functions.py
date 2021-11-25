@@ -1,6 +1,7 @@
 from pathlib import Path
 import holmes_extractor as holmes
 import os
+import streamlit.components.v1 as components
 
 class Helper:
     """This class handles serialization, initialization, formatting and various HTML snippets"""
@@ -50,19 +51,14 @@ class Helper:
         
         return output_list
 
+
     # HTML
-    def central_text(self, text):
-        """Central Header"""
-
-        html = f"""<h2 class='central_text'>{text}</h2>"""
-        return html
-
     def card(self, n, text):
         """HTML Card"""
 
         html = f"""
         <div class='kpi'>
-            <h4 class='card_text'>{n}<h4>
+            <h4 class='card_text' id='test'->{n}<h4>
             <span>{text}</span>
         </div>
         """
@@ -78,4 +74,5 @@ class Helper:
         """
         return html
 
-
+    def add_javascript(self,code):
+        components.html(f"""<script>{code}</script>""")

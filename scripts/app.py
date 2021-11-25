@@ -10,6 +10,7 @@ from helper_functions import Helper
 # Configuration
 en_literature_dir = Path("data/en_literature")
 en_ontology_path = Path("data/en_literature/example_search_EN_literature_ontology.owl")
+model_name = "en_core_web_trf"
 color_map = {
     "relation":"#607EC9",
     "overlapping_relation":"#BF1E7F",
@@ -21,7 +22,12 @@ if __name__ == '__main__':
     # CSS
     with open("scripts/style.css") as f:
         st.markdown("<style>" + f.read() + "</style>", unsafe_allow_html=True)
+
+    # Helper & JS
     helper = Helper()
+
+    with open("scripts/script.js") as f:
+        helper.add_javascript(f.read())
 
     # Logo
     empty_col, img_col, empty2_col = st.columns([0.4,0.8,0.4])
@@ -34,7 +40,10 @@ if __name__ == '__main__':
 
         # Initialization
         data_load_state = st.subheader("Setting up Holmes...")
-        holmes_manager = helper.setup_en_literature(en_ontology_path,"en_core_web_trf",en_literature_dir)
+        # Save holmes manager in session state
+        if "holmes" not in st.session_state:
+            holmes_manager = helper.setup_en_literature(en_ontology_path, model_name, en_literature_dir)
+            st.session_state["holmes"] = holmes_manager
         data_load_state.subheader("⚙️ Intelligent Information Extraction")
 
         # Intro
@@ -84,16 +93,25 @@ if __name__ == '__main__':
         st.markdown("""---""")
 
         # Processing
-        holmes_results = holmes_manager.topic_match_documents_against(search,only_one_result_per_document=True)
-        results = helper.format_topic_query_output(holmes_results,color_map)
+        if "query" not in st.session_state:
+            st.session_state["query"] = search
+            holmes_results = st.session_state["holmes"].topic_match_documents_against(search,only_one_result_per_document=True)
+            results = helper.format_topic_query_output(holmes_results,color_map)
+            st.session_state["results"] = results
 
-        if n > len(results):
-            n = len(results)
+        elif st.session_state["query"] != search:
+            st.session_state["query"] = search
+            holmes_results = st.session_state["holmes"].topic_match_documents_against(search,only_one_result_per_document=True)
+            results = helper.format_topic_query_output(holmes_results,color_map)
+            st.session_state["results"] = results
 
-        results = results[:n]
+        if n > len(st.session_state["results"]):
+            n = len(st.session_state["results"])
+
+        _results = st.session_state["results"][:n]
 
         # Printing
-        for result in results:
+        for result in _results:
             st.markdown(helper.topic_query_output(result["label"],result["rank"],result["text"],result["answers"]), unsafe_allow_html=True)
             st.markdown("""---""")
 
