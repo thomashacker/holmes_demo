@@ -96,5 +96,3 @@ class Helper:
         """
         return html
 
-    def add_javascript(self,code):
-        components.html(f"""<script>{code}</script>""")
