@@ -40,12 +40,6 @@ class Helper:
             else:
                 output_dict["answers"] = ""
 
-            #last_index = 0
-            #for word_info in result["word_infos"]:
-            #    background_color = f"style='background-color:{color_map[word_info[2]]}'"
-            #    output_dict["text"] += og_text[last_index:word_info[0]-1]+f" <p class='text_mark' data-text='{word_info[4]}' {background_color}> "+og_text[word_info[0]:word_info[1]]+" </p> "
-            #    last_index = word_info[1]+1
-
             indices_list = self.group_indices(result["word_infos"], result["answers"], color_map)
             offset = 0
             for index in indices_list:
@@ -80,15 +74,12 @@ class Helper:
         indices_list = sorted(indices_list, key=lambda tup: tup[0])
         return indices_list
 
-
-
-
     # HTML
     def card(self, n, text):
         """HTML Card"""
 
         html = f"""
-        <div class='kpi'>
+        <div class='card'>
             <h4 class='card_text' id='test'->{n}<h4>
             <span>{text}</span>
         </div>

@@ -1,9 +1,4 @@
-.central_text{
-    text-align: center;
-    top: 50%;
-}
-
-.kpi{
+.card{
     text-align: center;
     border-radius: 10px;
     background: linear-gradient(90deg, rgba(77,241,241,1) 0%, rgba(82,124,230,1) 43%, rgba(219,0,132,1) 100%);
@@ -13,7 +8,7 @@
     padding-bottom: 5%;
 }
 
-.kpi:hover {
+.card:hover {
     transform: scale(1.1);
   }
 
