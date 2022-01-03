@@ -91,7 +91,7 @@ class Helper:
 
         html = f"""
         <span class='rank'>{rank}</span> <span class='label'>{label}</span>
-        <p class='text'>{text}</p>
+        <div class='text'>{text}</div>
         <p class='answer_container'>{answer}</p>
         """
         return html
