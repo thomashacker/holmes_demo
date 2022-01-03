@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Tuple
 import holmes_extractor as holmes
 import os
 import streamlit.components.v1 as components
@@ -35,21 +36,51 @@ class Helper:
 
             if len(result["answers"]) > 0:
                 for answer in result["answers"]:
-                    output_dict["answers"] += "<p class='answer'>"+og_text[answer[0]:answer[1]]+"</p>"
+                    output_dict["answers"] += f"<p class='answer'>{og_text[answer[0]:answer[1]]}</p>"
             else:
                 output_dict["answers"] = ""
 
-            last_index = 0
-            for word_info in result["word_infos"]:
-                
-                background_color = f"style='background-color:{color_map[word_info[2]]}'"
+            #last_index = 0
+            #for word_info in result["word_infos"]:
+            #    background_color = f"style='background-color:{color_map[word_info[2]]}'"
+            #    output_dict["text"] += og_text[last_index:word_info[0]-1]+f" <p class='text_mark' data-text='{word_info[4]}' {background_color}> "+og_text[word_info[0]:word_info[1]]+" </p> "
+            #    last_index = word_info[1]+1
 
-                output_dict["text"] += og_text[last_index:word_info[0]-1]+f" <p class='text_mark' data-text='{word_info[4]}' {background_color}> "+og_text[word_info[0]:word_info[1]]+" </p> "
-                last_index = word_info[1]+1
+            indices_list = self.group_indices(result["word_infos"], result["answers"], color_map)
+            offset = 0
+            for index in indices_list:
+                start_index = index[0]+offset
+                start_snippet = og_text[:start_index] 
+                end_snippet = og_text[start_index:]
+                og_text = start_snippet + index[1] + end_snippet
+                offset += index[2]
 
+            output_dict["text"] = og_text
             output_list.append(output_dict)
         
         return output_list
+
+
+    def group_indices(self, word_infos, answers, color_map):
+        indices_list = []
+
+        for answer in answers:
+            first_tag = f" <span class='answer_mark'>"
+            last_tag = f" </span> "
+            indices_list.append((answer[0], first_tag, len(first_tag)))
+            indices_list.append((answer[1], last_tag, len(last_tag)))           
+
+        for word_info in word_infos:
+            background_color = f"style='background-color:{color_map[word_info[2]]}'"
+            first_tag = f" <p class='text_mark' data-text='{word_info[4]}' {background_color}> "
+            last_tag = f" </p> "
+            indices_list.append((word_info[0], first_tag, len(first_tag)))
+            indices_list.append((word_info[1], last_tag, len(last_tag)))
+          
+        indices_list = sorted(indices_list, key=lambda tup: tup[0])
+        return indices_list
+
+
 
 
     # HTML

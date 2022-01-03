@@ -23,11 +23,8 @@ if __name__ == '__main__':
     with open("scripts/style.css") as f:
         st.markdown("<style>" + f.read() + "</style>", unsafe_allow_html=True)
 
-    # Helper & JS
+    # Helper
     helper = Helper()
-
-    with open("scripts/script.js") as f:
-        helper.add_javascript(f.read())
 
     # Logo
     empty_col, img_col, empty2_col = st.columns([0.4,0.8,0.4])
