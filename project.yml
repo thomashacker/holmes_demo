@@ -2,7 +2,7 @@ title: "Holmes Demo"
 description: "This repository builds a streamlit application for demonstrating Topic Extraction with [Holmes](https://github.com/msg-systems/holmes-extractor)."
 
 vars:
-  en_ontology: "data/example_search_EN_literature_ontology.owl"
+  en_ontology: "data/en_literature/example_search_EN_literature_ontology.owl"
   en_literature: "data/en_literature/"
   en_model : "en_core_web_trf"
 

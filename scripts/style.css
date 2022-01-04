@@ -35,6 +35,11 @@
     display: inline;
 }
 
+.text p:empty { 
+    display: inline ;
+    line-height: 2;
+}
+
 .text_mark {
     background-color: green;
     color: white;
