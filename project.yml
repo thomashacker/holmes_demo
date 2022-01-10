@@ -1,10 +1,13 @@
 title: "Holmes Demo"
-description: "This repository builds a streamlit application for demonstrating Topic Extraction with [Holmes](https://github.com/msg-systems/holmes-extractor)."
+description: "This repository builds a streamlit application for demonstrating Topic Extraction with [Holmes](https://github.com/msg-systems/holmes-extractor). It is inspired by the original demo hosted on https://holmes-demo.xt.msg.team/"
 
 vars:
   en_ontology: "data/en_literature/example_search_EN_literature_ontology.owl"
   en_literature: "data/en_literature/"
   en_model : "en_core_web_trf"
+
+  de_literature: "data/de_literature/"
+  de_model : "de_core_news_lg"
 
 directories: ["scripts","data"]
 
@@ -15,6 +18,9 @@ assets:
 workflows:
   install:
     - requirements
+  download:
+    - download_en
+    - download_de
 
 commands:
   - name: "requirements"
@@ -22,14 +28,21 @@ commands:
     script:
       - "pip install -r requirements.txt"
 
-  - name: "download_en_literature"
+  - name: "download_en"
     help: "Download data for the english literature example"
     script:
       - "python -m coreferee install en"
-      - "python -m spacy download en_core_web_trf"
-      - "python scripts/download.py ${vars.en_ontology} ${vars.en_model} ${vars.en_literature}"
+      - "python -m spacy download ${vars.en_model}"
+      - "python scripts/download_en.py ${vars.en_ontology} ${vars.en_model} ${vars.en_literature}"
     deps:
       - ${vars.en_ontology}
+
+  - name: "download_de"
+    help: "Download data for the german literature example"
+    script:
+      - "python -m coreferee install de"
+      - "python -m spacy download ${vars.de_model}"
+      - "python scripts/download_de.py ${vars.de_model} ${vars.de_literature}"
 
   - name: "app"
     help: "Start the Holmes demo"

@@ -4,6 +4,7 @@ import holmes_extractor as holmes
 from wasabi import Printer
 import typer
 from pathlib import Path
+from bs4 import BeautifulSoup
 
 """This script downloads and saves Harry Potter Chapters for the english literature example (Topic Matching)"""
 
@@ -62,12 +63,12 @@ def main(ontology_path:Path, model_name:str, working_dir:Path):
             msg.good("Done")
 
     extract_chapters_from_book("https://raw.githubusercontent.com/formcept/whiteboard/master/nbviewer/notebooks/data/harrypotter/Book%201%20-%20The%20Philosopher's%20Stone.txt", "1 ‘The Philosopher\'s Stone’")
-    #extract_chapters_from_book("https://raw.githubusercontent.com/formcept/whiteboard/master/nbviewer/notebooks/data/harrypotter/Book%202%20-%20The%20Chamber%20of%20Secrets.txt", "2 ‘The Chamber of Secrets’")
-    #extract_chapters_from_book("https://raw.githubusercontent.com/formcept/whiteboard/master/nbviewer/notebooks/data/harrypotter/Book%203%20-%20The%20Prisoner%20of%20Azkaban.txt", "3 ‘The Prisoner of Azkaban’")
-    #extract_chapters_from_book("https://raw.githubusercontent.com/formcept/whiteboard/master/nbviewer/notebooks/data/harrypotter/Book%204%20-%20The%20Goblet%20of%20Fire.txt", "4 ‘The Goblet of Fire’")
-    #extract_chapters_from_book("https://raw.githubusercontent.com/formcept/whiteboard/master/nbviewer/notebooks/data/harrypotter/Book%205%20-%20The%20Order%20of%20the%20Phoenix.txt", "5 ‘The Order of the Phoenix’")
-    #extract_chapters_from_book("https://raw.githubusercontent.com/formcept/whiteboard/master/nbviewer/notebooks/data/harrypotter/Book%206%20-%20The%20Half%20Blood%20Prince.txt", "6 ‘The Half Blood Prince’")
-    #extract_chapters_from_book("https://raw.githubusercontent.com/formcept/whiteboard/master/nbviewer/notebooks/data/harrypotter/Book%207%20-%20The%20Deathly%20Hallows.txt", "7 ‘The Deathly Hallows’")
+    extract_chapters_from_book("https://raw.githubusercontent.com/formcept/whiteboard/master/nbviewer/notebooks/data/harrypotter/Book%202%20-%20The%20Chamber%20of%20Secrets.txt", "2 ‘The Chamber of Secrets’")
+    extract_chapters_from_book("https://raw.githubusercontent.com/formcept/whiteboard/master/nbviewer/notebooks/data/harrypotter/Book%203%20-%20The%20Prisoner%20of%20Azkaban.txt", "3 ‘The Prisoner of Azkaban’")
+    extract_chapters_from_book("https://raw.githubusercontent.com/formcept/whiteboard/master/nbviewer/notebooks/data/harrypotter/Book%204%20-%20The%20Goblet%20of%20Fire.txt", "4 ‘The Goblet of Fire’")
+    extract_chapters_from_book("https://raw.githubusercontent.com/formcept/whiteboard/master/nbviewer/notebooks/data/harrypotter/Book%205%20-%20The%20Order%20of%20the%20Phoenix.txt", "5 ‘The Order of the Phoenix’")
+    extract_chapters_from_book("https://raw.githubusercontent.com/formcept/whiteboard/master/nbviewer/notebooks/data/harrypotter/Book%206%20-%20The%20Half%20Blood%20Prince.txt", "6 ‘The Half Blood Prince’")
+    extract_chapters_from_book("https://raw.githubusercontent.com/formcept/whiteboard/master/nbviewer/notebooks/data/harrypotter/Book%207%20-%20The%20Deathly%20Hallows.txt", "7 ‘The Deathly Hallows’")
 
 if __name__ == "__main__":
     typer.run(main)
