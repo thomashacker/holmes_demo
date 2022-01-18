@@ -91,6 +91,16 @@ def card(n : int, text: str) -> str:
     """
     return html
 
+def api_card(text: str, color: str) -> str:
+    """Create a HTML Card for API display"""
+
+    html = f"""
+    <div class='demo_card' style='background-color:{color}'>
+        <span>{text}</span>
+    </div>
+    """
+    return html
+
 def format_results_HTML(label:str, rank: str, score: float, text:str, answer:str) -> str:
     """Format results to HTML for Topic Extraction"""
 

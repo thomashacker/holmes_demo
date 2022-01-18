@@ -40,7 +40,9 @@ if __name__ == '__main__':
     img_col.image("data/img/lunar.png")
 
     # Header
-    st.title("Welcome to Holmes")
+    header, api_status_col = st.columns([1.5,1])
+    header.title("Welcome to Holmes")
+    api_status_col.markdown(helper.api_card("🤖 Connected","#8B9A46"), unsafe_allow_html=True)
 
     try:
         # Initialization
@@ -102,11 +104,15 @@ if __name__ == '__main__':
             else:
                 search = st.selectbox("Predefined queries", predefined_queries_de)
 
+        loading_results = st.markdown("**Status:**🔎 Loading")
+
         n = st.slider("Show top n results", min_value=1, max_value=50, value=10)
 
         # Legend
         st.markdown(f"<p class ='answer' style='background-color:{color_map['single']}'>single words</p><p class ='answer' style='background-color:{color_map['relation']}'>relations involving two words</p><p class ='answer' style='background-color:{color_map['overlapping_relation']}'>relations involving three or more words</p>", unsafe_allow_html=True)
         st.markdown("""---""")
+
+        results_container = st.container()
 
         # Holmes Extraction
         if language == "English":
@@ -145,8 +151,10 @@ if __name__ == '__main__':
 
         # Printing
         for result in _results:
-            st.markdown(helper.format_results_HTML(result["label"],result["rank"],result["score"],result["text"],result["answers"]), unsafe_allow_html=True)
-            st.markdown("""---""")
+            results_container.markdown(helper.format_results_HTML(result["label"],result["rank"],result["score"],result["text"],result["answers"]), unsafe_allow_html=True)
+            results_container.markdown("""---""")
+
+        loading_results.markdown("**Status:** ✔️ Done")
 
     except KeyboardInterrupt:
         try:
